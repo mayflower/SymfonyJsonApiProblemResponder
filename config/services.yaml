@@ -1,0 +1,7 @@
+services:
+  Customerce\JsonApiProblemResponder\EventListener\ExceptionListener:
+    public: true
+    autowire: true
+    autoconfigure: true
+    arguments:
+      - '@logger'
