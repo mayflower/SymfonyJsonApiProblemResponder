@@ -1,0 +1,63 @@
+{
+    "name": "customerce/json-api-problem-responder",
+    "description": "A package for formatted JSON responses",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Customerce\\JsonApiProblemResponder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tobias Mogdans",
+            "email": "tobias.mogdans@mayflower.de"
+        }
+    ],
+    "require": {
+        "php": "~8.1",
+        "symfony/console": "^6.0",
+        "symfony/framework-bundle": "^6.0",
+        "symfony/validator": "^6.0",
+        "symfony/yaml": "^6.0"
+    },
+    "require-dev": {
+        "customerce/coding-standard": "dev-main",
+        "ergebnis/composer-normalize": "^2.15",
+        "phpstan/phpstan": "^1.4",
+        "phpunit/phpunit": "9.5.16",
+        "symfony/phpunit-bridge": "^6.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/customerce/coding-standard-php"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        }
+    },
+    "scripts": {
+        "all-checks": [
+            "@check-style",
+            "@phpstan",
+            "@psalm",
+            "@phpunit",
+            "@deptrac"
+        ],
+        "auto-scripts": {
+            "cache:clear --no-warmup": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "check-style": "phpcs -q --parallel=$(nproc) --standard=customerce ./ --ignore=vendor/*",
+        "deptrac": "deptrac --no-progress",
+        "fix-style": "phpcbf -q --parallel=$(nproc) --standard=customerce ./ --ignore=vendor/*",
+        "phpstan": "phpstan --no-progress",
+        "phpunit": "DB_HOST=postgres DB_PASSWORD=helloworld KAFKA_BROKERS=redpanda:29092 REDIS_HOST=redis XDEBUG_MODE=coverage phpunit --coverage-text",
+        "phpunit-ci-coverage": "DB_HOST=localhost DB_PASSWORD=helloworld_test REDIS_HOST=localhost XDEBUG_MODE=coverage phpunit --coverage-xml=/tmp/coverage/coverage-xml --log-junit=/tmp/coverage/junit.xml --coverage-text=/tmp/coverage/phpunit.txt",
+        "psalm": "psalm --threads=$(nproc) --no-progress"
+    }
+}
