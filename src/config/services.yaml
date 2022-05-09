@@ -1,0 +1,4 @@
+services:
+  Customerce\JsonApiProblemResponder\EventListener\ExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }

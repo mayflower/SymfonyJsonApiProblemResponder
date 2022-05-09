@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Customerce\JsonApiProblemResponder;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
